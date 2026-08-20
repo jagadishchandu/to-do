@@ -1,0 +1,8 @@
+{
+  "portals": [
+    {
+      "name": "service-now",
+      "url": "https://elevancehealth.service-now.com/now/nav/ui/classic/params/target/%24pa_dashboard.do"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip --version)",
+      "Bash(pip install *)",
+      "Bash(python -m py_compile todo_app.py setup_autostart.py)",
+      "Bash(python setup_autostart.py)",
+      "Bash(python todo_app.py)",
+      "Bash(taskkill //F //FI \"WINDOWTITLE eq Daily Todo*\")",
+      "Bash(wmic process *)",
+      "Bash(tasklist //FI \"IMAGENAME eq pythonw.exe\")",
+      "Bash(python -m py_compile todo_app.py)",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"Name like 'pythonw%'\")",
+      "PowerShell(Stop-Process -Id 34788,4100 -Force -ErrorAction SilentlyContinue)",
+      "Bash(python -c \"import reportlab; print\\('reportlab', reportlab.Version\\)\")",
+      "Bash(python \"C:\\\\Users\\\\JCHAND~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-jchandraprasad-Downloads-todo\\\\a13747ce-c056-416f-a730-77c356721ef9\\\\scratchpad\\\\test_pdf.py\")",
+      "Bash(python -c ' *)",
+      "Bash(timeout 20 python \"C:\\\\Users\\\\JCHAND~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-jchandraprasad-Downloads-todo\\\\a13747ce-c056-416f-a730-77c356721ef9\\\\scratchpad\\\\test_persist1.py\")",
+      "Bash(timeout 20 python \"C:\\\\Users\\\\JCHAND~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-jchandraprasad-Downloads-todo\\\\a13747ce-c056-416f-a730-77c356721ef9\\\\scratchpad\\\\test_persist2.py\")",
+      "Bash(timeout 20 python \"C:\\\\Users\\\\JCHAND~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-jchandraprasad-Downloads-todo\\\\a13747ce-c056-416f-a730-77c356721ef9\\\\scratchpad\\\\test_persist1c.py\")",
+      "Bash(timeout 12 python \"C:\\\\Users\\\\jchandraprasad\\\\Downloads\\\\todo\\\\portal_browser_helper.py\" \"https://example.com\" \"C:\\\\Users\\\\JCHAND~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-jchandraprasad-Downloads-todo\\\\a13747ce-c056-416f-a730-77c356721ef9\\\\scratchpad\\\\portal_test_profile\")",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(timeout 12 python \"C:\\\\Users\\\\jchandraprasad\\\\Downloads\\\\todo\\\\portal_browser_helper.py\" \"https://example.com\" \"C:\\\\Users\\\\JCHAND~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-jchandraprasad-Downloads-todo\\\\a13747ce-c056-416f-a730-77c356721ef9\\\\scratchpad\\\\portal_test_profile3\")",
+      "Bash(timeout 10 python \"C:\\\\Users\\\\JCHAND~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-jchandraprasad-Downloads-todo\\\\a13747ce-c056-416f-a730-77c356721ef9\\\\scratchpad\\\\test_isolate1.py\")",
+      "Bash(timeout 10 python \"C:\\\\Users\\\\JCHAND~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-jchandraprasad-Downloads-todo\\\\a13747ce-c056-416f-a730-77c356721ef9\\\\scratchpad\\\\test_isolate2.py\")",
+      "Bash(timeout 10 python \"C:\\\\Users\\\\JCHAND~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-jchandraprasad-Downloads-todo\\\\a13747ce-c056-416f-a730-77c356721ef9\\\\scratchpad\\\\test_isolate3.py\")",
+      "Bash(timeout 10 python \"C:\\\\Users\\\\JCHAND~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-jchandraprasad-Downloads-todo\\\\a13747ce-c056-416f-a730-77c356721ef9\\\\scratchpad\\\\test_isolate4.py\")",
+      "Bash(timeout 12 python \"C:\\\\Users\\\\jchandraprasad\\\\Downloads\\\\todo\\\\portal_browser_helper.py\" \"https://example.com\" \"C:\\\\Users\\\\JCHAND~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-jchandraprasad-Downloads-todo\\\\a13747ce-c056-416f-a730-77c356721ef9\\\\scratchpad\\\\portal_test_fixed\")",
+      "Bash(timeout 20 python \"C:\\\\Users\\\\JCHAND~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-jchandraprasad-Downloads-todo\\\\a13747ce-c056-416f-a730-77c356721ef9\\\\scratchpad\\\\test_portal_nav.py\")",
+      "Bash(timeout 30 python test_portals_tab.py)",
+      "Bash(grep -n \"hours_labels = {v: k for k, v in self.HOURS_OPTIONS.items\\(\\)}\" todo_app.py)"
+    ]
+  }
+}
