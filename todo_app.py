@@ -2753,26 +2753,35 @@ class TodoApp:
 
         win = ctk.CTkToplevel(self.root)
         win.title("Task Details")
-        win.geometry("380x820")
+        win.geometry("380x480")
         win.configure(fg_color=BG)
         win.transient(self.root)
         win.grab_set()
         win.resizable(False, False)
 
+        # NOTE: CustomTkinter multiplies every geometry() request by the
+        # detected Windows DPI scale (1.5x on this machine), so a requested
+        # height of 480 actually renders at 720px — a plain "380x640" request
+        # was rendering at 960px, taller than even a 800px-tall screen. The
+        # content is also wrapped in a scrollable frame so it can't overflow
+        # regardless of how much content (e.g. many subtasks) exists.
+        body = ctk.CTkScrollableFrame(win, fg_color="transparent")
+        body.pack(fill="both", expand=True, padx=0, pady=0)
+
         ctk.CTkLabel(
-            win, text="Title", font=("Segoe UI", 12, "bold"), text_color=TEXT_SECONDARY
+            body, text="Title", font=("Segoe UI", 12, "bold"), text_color=TEXT_SECONDARY
         ).pack(anchor="w", padx=20, pady=(20, 4))
         title_entry = ctk.CTkEntry(
-            win, fg_color=ENTRY_BG, border_color=BORDER, border_width=1, corner_radius=10, height=38
+            body, fg_color=ENTRY_BG, border_color=BORDER, border_width=1, corner_radius=10, height=38
         )
         title_entry.insert(0, task["text"])
         title_entry.pack(fill="x", padx=20)
 
         ctk.CTkLabel(
-            win, text="Notes", font=("Segoe UI", 12, "bold"), text_color=TEXT_SECONDARY
+            body, text="Notes", font=("Segoe UI", 12, "bold"), text_color=TEXT_SECONDARY
         ).pack(anchor="w", padx=20, pady=(16, 4))
         notes_box = ctk.CTkTextbox(
-            win,
+            body,
             fg_color=ENTRY_BG,
             border_color=BORDER,
             border_width=1,
@@ -2784,10 +2793,10 @@ class TodoApp:
         notes_box.pack(fill="both", padx=20, expand=False)
 
         ctk.CTkLabel(
-            win, text="Schedule — start auto-moves this to In Progress",
+            body, text="Schedule — start auto-moves this to In Progress",
             font=("Segoe UI", 11, "bold"), text_color=TEXT_SECONDARY, wraplength=340, justify="left",
         ).pack(anchor="w", padx=20, pady=(14, 4))
-        schedule_row = ctk.CTkFrame(win, fg_color="transparent")
+        schedule_row = ctk.CTkFrame(body, fg_color="transparent")
         schedule_row.pack(fill="x", padx=20)
 
         start_labels, label_to_start = build_time_options(iso_to_hhmm(task.get("start_time")))
@@ -2815,13 +2824,13 @@ class TodoApp:
         end_menu.set(current_end_label)
         end_menu.pack(fill="x")
 
-        schedule_error = ctk.CTkLabel(win, text="", font=("Segoe UI", 10), text_color=DANGER_TEXT)
+        schedule_error = ctk.CTkLabel(body, text="", font=("Segoe UI", 10), text_color=DANGER_TEXT)
         schedule_error.pack(anchor="w", padx=20, pady=(4, 0))
 
         ctk.CTkLabel(
-            win, text="Priority", font=("Segoe UI", 12, "bold"), text_color=TEXT_SECONDARY
+            body, text="Priority", font=("Segoe UI", 12, "bold"), text_color=TEXT_SECONDARY
         ).pack(anchor="w", padx=20, pady=(12, 4))
-        priority_row = ctk.CTkFrame(win, fg_color="transparent")
+        priority_row = ctk.CTkFrame(body, fg_color="transparent")
         priority_row.pack(fill="x", padx=20, pady=(0, 10))
 
         current_priority = task.get("priority", "medium")
@@ -2849,10 +2858,10 @@ class TodoApp:
         priority_menu.pack(side="left", fill="x", expand=True)
 
         ctk.CTkLabel(
-            win, text="Status", font=("Segoe UI", 12, "bold"), text_color=TEXT_SECONDARY
+            body, text="Status", font=("Segoe UI", 12, "bold"), text_color=TEXT_SECONDARY
         ).pack(anchor="w", padx=20, pady=(0, 4))
         status_menu = ctk.CTkOptionMenu(
-            win,
+            body,
             values=[STATUS_LABELS[s] for s in STATUS_ORDER],
             fg_color=ENTRY_BG,
             button_color=ACCENT,
@@ -2870,17 +2879,17 @@ class TodoApp:
                 self.root.after(50, lambda: self._open_task_dialog(parent_id))
 
             parent_link = ctk.CTkLabel(
-                win, text=f"↳ Subtask of: {parent_task['text'][:50]}", font=("Segoe UI", 11),
+                body, text=f"↳ Subtask of: {parent_task['text'][:50]}", font=("Segoe UI", 11),
                 text_color=ACCENT, anchor="w", cursor="hand2",
             )
             parent_link.pack(anchor="w", padx=20, pady=(0, 8))
             parent_link.bind("<Button-1>", lambda _e: open_parent())
 
         ctk.CTkLabel(
-            win, text="Subtasks", font=("Segoe UI", 12, "bold"), text_color=TEXT_SECONDARY
+            body, text="Subtasks", font=("Segoe UI", 12, "bold"), text_color=TEXT_SECONDARY
         ).pack(anchor="w", padx=20, pady=(4, 4))
 
-        subtasks_frame = ctk.CTkScrollableFrame(win, fg_color=CARD, corner_radius=10, height=110)
+        subtasks_frame = ctk.CTkScrollableFrame(body, fg_color=CARD, corner_radius=10, height=110)
         subtasks_frame.pack(fill="x", padx=20)
 
         def open_subtask(sub_id):
@@ -2914,7 +2923,7 @@ class TodoApp:
 
         render_subtasks()
 
-        add_sub_row = ctk.CTkFrame(win, fg_color="transparent")
+        add_sub_row = ctk.CTkFrame(body, fg_color="transparent")
         add_sub_row.pack(fill="x", padx=20, pady=(8, 14))
         new_sub_entry = ctk.CTkEntry(
             add_sub_row, placeholder_text="Add a subtask...", fg_color=ENTRY_BG,
